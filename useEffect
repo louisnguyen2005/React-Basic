@@ -75,3 +75,42 @@ function Content() {
 }
 
 export default Content;
+
+
+
+// change avt
+
+import React, { useEffect, useState } from "react";
+
+// 1.useEffect(callback)
+// be called component re-ren
+// be called component add elemont in DOM
+// 2.useEffect(callback,[])
+// only be called component mouth and do not to be when re-render
+//  3.useEffect(callback,[deps])   callback will call again when deps have changed
+// all ussualy be called component mouth
+
+function Content() {
+  const [avatar, setAvatar] = useState();
+
+  useEffect(() => {
+    return () => {
+      avatar && URL.revokeObjectURL(avatar.preview);
+    };
+  }, [avatar]);
+  const handlePreviewAvatar = (e) => {
+    const file = e.target.files[0];
+    file.preview = URL.createObjectURL(file);
+    setAvatar(file);
+  };
+
+  return (
+    <div>
+      <input type="file" alt="" onChange={handlePreviewAvatar} />
+      {avatar && <img src={avatar.preview} alt="" width="80%" />}
+    </div>
+  );
+}
+
+export default Content;
+
