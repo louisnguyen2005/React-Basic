@@ -75,3 +75,64 @@ function Content() {
 }
 
 export default Content;
+
+
+
+//// edit comment
+
+
+import React, { useEffect, useState } from "react";
+
+// 1.useEffect(callback)
+// be called component re-ren
+// be called component add elemont in DOM
+// 2.useEffect(callback,[])
+// only be called component mouth and do not to be when re-render
+//  3.useEffect(callback,[deps])   callback will call again when deps have changed
+// all ussualy be called component mouth
+
+const lessons = [
+  {
+    name: "Lear React JS Hooks",
+    id: 1,
+  },
+  {
+    name: "Watch Pokemon long Movie",
+    id: 2,
+  },
+  {
+    name: "Eating with many friends",
+    id: 3,
+  },
+];
+
+function Content() {
+  const [lessonId, setlessonId] = useState([]);
+  useEffect(() => {
+    const handleChange = ({ detail }) => {
+      console.log(detail);
+    };
+    window.addEventListener(`lesson-${lessonId}`, handleChange);
+    return () => {
+      window.addEventListener(`lesson-${lessonId}`, handleChange);
+    };
+  }, [lessonId]);
+  return (
+    <div>
+      <ul>
+        {lessons.map((lesson) => (
+          <li
+            key={lesson.id}
+            onClick={() => setlessonId(lesson.id)}
+            style={{ color: lessonId === lesson.id ? "blue" : "black" }}
+          >
+            {lesson.name}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default Content;
+
