@@ -163,3 +163,102 @@ function App() {
 }
 export default App;
 
+
+
+
+
+//// test higher about useReducer
+
+
+import { useReducer, useRef } from "react";
+const init = {
+  job: "",
+  jobs: [],
+};
+
+const AddJob = "add";
+const DeleteJob = "delete";
+const SetJob = "set";
+
+const setjob = (payload) => {
+  return {
+    type: SetJob,
+    payload,
+  };
+};
+const addjob = (payload) => {
+  return {
+    type: AddJob,
+    payload,
+  };
+};
+const deletejob = (payload) => {
+  return {
+    type: DeleteJob,
+    payload,
+  };
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case SetJob:
+      return {
+        ...state,
+        job: action.payload,
+      };
+      break;
+    case AddJob:
+      return {
+        ...state,
+        job: [...state.jobs, action.payload],
+      };
+      break;
+
+    case DeleteJob:
+      const newJob = [...state.jobs];
+      newJob.splice(action.payload, 1);
+      return {
+        ...state,
+        jobs: newJob,
+      };
+      break;
+
+    default:
+      throw new Error("somthing wrongs");
+  }
+};
+function App() {
+  const [state, dispatch] = useReducer(reducer, init);
+  const [job, jobs] = state;
+  const handleSubmit = () => {
+    dispatch(addjob(job));
+    dispatch(setjob(""));
+
+    nameref.current.focus();
+  };
+  const nameref = useRef();
+  return (
+    <div>
+      <h1>ToDo</h1>
+      <input
+        ref={nameref}
+        placeholder="Enter the job"
+        value={job}
+        onChange={(e) => {
+          dispatch(e.target.value);
+        }}
+      />
+      <button onClick={handleSubmit}>Add</button>
+      <ul>
+        {jobs.map((job, index) => {
+          <li key={index}>
+            {job}
+            <span onClick={dispatch(deletejob(index))}>x</span>
+          </li>;
+        })}
+      </ul>
+    </div>
+  );
+}
+export default App;
+
