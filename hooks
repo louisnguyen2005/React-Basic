@@ -71,5 +71,95 @@ function Content({ kason }) {
 
 export default memo(Content);
 
+//// useMemo
 
+// import { useCallback, useState, useMemo, useRef } from "react";
+
+// function App() {
+//   const [name, setName] = useState("");
+//   const [price, setPrice] = useState("");
+//   const [products, setProducts] = useState([]);
+//   const nameref = useRef();
+//   const handleSubmit = () => {
+//     setProducts([...products, { name, price: +price }]);
+
+//     setPrice("");
+//     setName("");
+//     nameref.current.focus();
+//   };
+
+//   const total = useMemo(() => {
+//     return products.reduce((result, prod) => {
+//       return result + prod.price;
+//     }, 0);
+//   }, [products]);
+
+//   return (
+//     <div className="App" style={{ padding: "32px" }}>
+//       <input
+//         ref={nameref}
+//         type="text"
+//         value={name}
+//         placeholder="Enter name"
+//         onChange={(e) => setName(e.target.value)}
+//       />
+//       <br />
+//       <input
+//         type="text"
+//         value={price}
+//         placeholder="Enter price"
+//         onChange={(e) => setPrice(e.target.value)}
+//       />
+//       <br />
+//       <button onClick={handleSubmit}>Add</button>
+//       <br />
+//       Total: {total}
+//       <ul>
+//         {products.map((product, index) => (
+//           <li key={index}>
+//             {product.name} - {product.price}
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+
+
+
+
+
+//// useReducer
+
+import { useReducer } from "react";
+
+const init = 0;
+const UP_State = "up";
+const DOWN_State = "down";
+const reduce = (state, action) => {
+  switch (action) {
+    case UP_State:
+      return state + 1;
+    case DOWN_State:
+      return state - 1;
+    default:
+      throw new Error("Wrong");
+  }
+};
+function App() {
+  const [count, dispatch] = useReducer(reduce, init);
+
+  return (
+    <div>
+      <h1>{count}</h1>
+      <button onClick={() => dispatch(DOWN_State)}>Down</button>
+
+      <button onClick={() => dispatch(UP_State)}>Up</button>
+    </div>
+  );
+}
+export default App;
 
