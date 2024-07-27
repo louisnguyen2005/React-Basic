@@ -38,3 +38,38 @@ function Content() {
 export default Content;
 
 
+// useCallback only use when we have memo 
+import { useCallback, useState } from "react";
+import Content from "./Content";
+
+function App() {
+  const [increase, setIncrese] = useState(0);
+  const handleIncrese = useCallback(() => {
+    setIncrese((prev) => prev + 1);
+  }, []);
+  return (
+    <div className="App" style={{ padding: "32px" }}>
+      <Content kason={handleIncrese} />
+      <h1>{increase}</h1>
+    </div>
+  );
+}
+
+export default App;
+
+import { memo } from "react";
+
+function Content({ kason }) {
+  console.log("re-render");
+  return (
+    <div>
+      hello cac mino {kason}
+      <button onClick={kason}>Click me</button>
+    </div>
+  );
+}
+
+export default memo(Content);
+
+
+
