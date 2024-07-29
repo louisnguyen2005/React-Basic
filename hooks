@@ -281,15 +281,17 @@ export default App;
 ??? end of the cours ????
 
 import { useStore, actions } from "./store";
-import { useRef } from "react";
+import { useRef,useReducer } from "react";
 
 function App() {
   const nameref = useRef();
   const [state, dispatch] = useStore();
+const [state, dispatch] = useReducer(reducer,init);
   const { ToDos, ToDoInput } = state;
 
   const handleAdd = () => {
     dispatch(actions.addTodo(ToDoInput));
+dispatch(actions.settodo(''))
     nameref.current.focus();
   };
 
