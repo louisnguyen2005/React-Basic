@@ -276,3 +276,108 @@ function App() {
 export default App;
 
 
+
+
+??? end of the cours ????
+
+import { useStore, actions } from "./store";
+import { useRef } from "react";
+
+function App() {
+  const nameref = useRef();
+  const [state, dispatch] = useStore();
+  const { ToDos, ToDoInput } = state;
+
+  const handleAdd = () => {
+    dispatch(actions.addTodo(ToDoInput));
+    nameref.current.focus();
+  };
+
+  return (
+    <div style={{ padding: 32 }}>
+      <input
+        ref={nameref}
+        value={ToDoInput}
+        placeholder="enter ToDo..."
+        onChange={(e) => {
+          dispatch(actions.Settodoinput(e.target.value));
+        }}
+      />
+
+      <button onClick={handleAdd}>Add</button>
+
+      <ul>
+        {ToDos.map((ToDo, index) => (
+          <li key={index}>
+            {ToDo}
+
+            <span
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                dispatch(actions.deletejob(index));
+              }}
+            >
+              &times;
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default App;
+
+
+
+
+
+
+?????? tiktok????
+
+
+import { useRef } from "react";
+import Video from "./videoTiktok";
+
+function App() {
+  const videoRef = useRef();
+
+  const handlePlay = () => {
+    videoRef.current.play();
+  };
+
+  const handlePause = () => {
+    videoRef.current.pause();
+  };
+  return (
+    <div style={{ padding: 40 }}>
+      <Video ref={videoRef} />
+      <button onClick={handlePlay}>Play</button>
+      <button onClick={handlePause}>Pause</button>
+    </div>
+  );
+}
+export default App;
+
+
+import { forwardRef, useImperativeHandle, useRef } from "react";
+import video1 from "./videos/tikttok.mp4";
+
+function Video(props, ref) {
+  const videoref = useRef();
+  useImperativeHandle(ref, () => ({
+    play() {
+      videoref.current.play();
+    },
+    pause() {
+      videoref.current.pause();
+    },
+  }));
+  return (
+    <div>
+      <video ref={videoref} width={800} height={700} src={video1} />
+    </div>
+  );
+}
+export default forwardRef(Video);
+
