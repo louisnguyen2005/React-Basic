@@ -1,0 +1,27 @@
+nav{
+    display: flex;
+    align-items: center;
+    margin-left: 2rem;
+    border-bottom: 2px solid blanchedalmond;
+    justify-content: space-around;
+    padding: 20px;
+    z-index: 999;
+}
+
+.nav-icons{ 
+    width: 1.5rem;
+    margin-left: 2rem;
+    color: rgb(227, 100, 32);
+    height: 1.5rem;
+}
+
+input{
+    border: none;
+    outline: none;
+    padding: 12px 20px;
+    background-color: whitesmoke;
+    margin-right: 20px;
+    border-radius: 5px;
+    width: 14rem;
+    position: relative;
+}

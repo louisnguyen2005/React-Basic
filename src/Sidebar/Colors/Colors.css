@@ -1,0 +1,74 @@
+.ml{
+    margin-top: 2em;
+    margin-right: 50px ;
+}
+
+.all{
+    background: linear-gradient(blue,crimson);
+}
+.color-title{
+margin-left: 30px;
+}
+
+.slidebar-title{
+    font-size: 22px;
+    font-weight: normal;
+    margin: 20px 0;
+}
+
+.sidebar-label-container{
+    display: block;
+    position: relative;
+    margin-top: 12px;
+    cursor: pointer;
+    padding-left:35px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+
+}
+
+.sidebar-label-container input{
+    cursor: pointer;
+    position: absolute;    
+}
+
+
+.checkmark{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+   border-radius: 50%;
+    background-color: rgb(243, 246, 249);
+}
+
+
+.sidebar-label-container:hover input ~.checkmark{
+    background-color: #ccc;
+}
+
+.sidebar-label-container input:checked ~.checkmark{
+    background-color: #536bd6;
+    }
+
+.checkmark::after{
+    content:"";
+    display: none;
+    position: absolute;
+}
+
+.sidebar-label-container input:checked ~.checkmark::after{
+    display: block;
+}
+
+.sidebar-label-container .checkmark::after{
+    width: 7px;
+    height: 7px;
+    left: 6.4px;
+    top: 6.4px;
+    border-radius: 50%;
+    background:white;
+}
